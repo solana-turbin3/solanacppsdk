@@ -1,4 +1,4 @@
-#include "solana/base58.h"
+#include "solana/base58.hpp"
 #include <stdexcept>
 
 namespace solana

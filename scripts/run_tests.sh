@@ -18,6 +18,7 @@ else
 fi
 
 CXXFLAGS="-std=c++17 -I$ROOT_DIR/include -Wall -Wextra"
+LDFLAGS="-L$ROOT_DIR/lib -lsodium"
 BUILD_DIR="$ROOT_DIR/build"
 
 mkdir -p "$BUILD_DIR"
@@ -32,10 +33,17 @@ build_and_run() {
   test_name=$(basename "$test_file" .cpp)
   
   echo "🔨 Building $test_name..."
-  "$COMPILER" $CXXFLAGS $(find "$ROOT_DIR/src/solana" -name '*.cpp') "$test_file" -o "$BUILD_DIR/$test_name"
+  "$COMPILER" $CXXFLAGS $(find "$ROOT_DIR/src/solana" -name '*.cpp') "$test_file" $LDFLAGS -o "$BUILD_DIR/$test_name"
 
   echo "Running $test_name..."
-  "$BUILD_DIR/$test_name"
+  # On Windows, we need to ensure the DLL is available
+  if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    # Copy DLL to build directory for Windows
+    cp "$ROOT_DIR/vcpkg/libsodium-win64/bin/libsodium-26.dll" "$BUILD_DIR/" 2>/dev/null || true
+    "$BUILD_DIR/$test_name"
+  else
+    "$BUILD_DIR/$test_name"
+  fi
   echo
 }
 

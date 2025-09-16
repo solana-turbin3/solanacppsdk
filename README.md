@@ -1,7 +1,13 @@
 # Solana C++ SDK (WIP)
 
-## Build & Test
+You can test using:
 
+1. Run all tests:
 ```bash
-mkdir -p build && clang++ -std=c++17 -Iinclude -Wall -Wextra src/base58.cpp tests/test_base58.cpp -o build/test_base58 && ./build/test_base58
+./scripts/run_tests.sh
+```
+
+Run only test_base58.cpp:
+```bash
+./scripts/run_tests.sh test_base58
 ```

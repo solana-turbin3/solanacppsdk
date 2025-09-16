@@ -1,4 +1,4 @@
-#include "solana/base58.hpp"
+#include "solana/base58.h"
 
 namespace solana
 {
@@ -92,12 +92,12 @@ namespace solana
     return decoded;
   }
 
-  std::string Base58::encode_str(const std::string &input)
+  std::string Base58::encodeString(const std::string &input)
   {
     return encode({input.begin(), input.end()});
   }
 
-  std::string Base58::decode_str(const std::string &input)
+  std::string Base58::decodeString(const std::string &input)
   {
     auto vec = decode(input);
     return {vec.begin(), vec.end()};

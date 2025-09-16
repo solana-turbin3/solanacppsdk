@@ -14,8 +14,8 @@ public:
     static std::vector<unsigned char> decode(const std::string& input);
 
     // String-friendly helpers
-    static std::string encode_str(const std::string& input);
-    static std::string decode_str(const std::string& input);
+    static std::string encodeString(const std::string& input);
+    static std::string decodeString(const std::string& input);
 
 private:
     static const char* const ALPHABET;

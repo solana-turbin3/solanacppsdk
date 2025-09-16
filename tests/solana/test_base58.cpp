@@ -1,7 +1,7 @@
-#include "solana/base58.hpp"
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+#include "solana/base58.h"
 
 using namespace solana;
 
@@ -35,32 +35,32 @@ int main() {
     // 1. Normal string
     {
         std::string input = "Hello Solana!";
-        std::string encoded = Base58::encode_str(input);
-        std::string decoded = Base58::decode_str(encoded);
+        std::string encoded = Base58::encodeString(input);
+        std::string decoded = Base58::decodeString(encoded);
         tr.check(decoded == input, "Normal string");
     }
 
     // 2. Empty string
     {
         std::string input = "";
-        std::string encoded = Base58::encode_str(input);
-        std::string decoded = Base58::decode_str(encoded);
+        std::string encoded = Base58::encodeString(input);
+        std::string decoded = Base58::decodeString(encoded);
         tr.check(decoded == input, "Empty string");
     }
 
     // 3. String with spaces
     {
         std::string input = "   ";
-        std::string encoded = Base58::encode_str(input);
-        std::string decoded = Base58::decode_str(encoded);
+        std::string encoded = Base58::encodeString(input);
+        std::string decoded = Base58::decodeString(encoded);
         tr.check(decoded == input, "String with spaces");
     }
 
     // 4. String with special characters
     {
         std::string input = "!@#$%^&*()_+-={}[];:,.<>/?";
-        std::string encoded = Base58::encode_str(input);
-        std::string decoded = Base58::decode_str(encoded);
+        std::string encoded = Base58::encodeString(input);
+        std::string decoded = Base58::decodeString(encoded);
         tr.check(decoded == input, "Special characters");
     }
 
